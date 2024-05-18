@@ -1,5 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+// var Carousel = require('react-responsive-carousel').Carousel;
 
 import img1 from "../../../../assets/home/01.jpg";
 import img2 from "../../../../assets/home/02.jpg";
@@ -10,9 +11,9 @@ import img6 from "../../../../assets/home/06.png";
 
 const Banner = () => {
   return (
-    <Carousel className=" ">
+    <Carousel>
       <div>
-        <img src={img2} />
+        <img className="text-center" src={img2} />
       </div>
       <div>
         <img src={img1} />
