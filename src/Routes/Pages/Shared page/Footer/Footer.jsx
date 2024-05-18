@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="  bg-neutral ">
       {/* max-w-screen-xl mx-auto  */}
-      <footer className="max-w-screen-xl p-10 mx-auto footer text-neutral-content">
+      <footer className=" p-10 footer text-neutral-content">
         <aside>
           <svg
             width="50"
