@@ -31,8 +31,6 @@ const [menuItem, setMenuItem] = useState([]);
             }
             </div>
 
-            {/* <button className="">view more</button> */}
-
             <div className="text-center my-5 ">
                 <button className="px-5 py-1 h-auto border-black border-b-2 rounded-xl text-2xl">View Full Menu</button>
             </div>

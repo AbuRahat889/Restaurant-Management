@@ -12,7 +12,7 @@ const MenuItem = ({ item }) => {
         <h1 className="cinzel text-xl ">{name} ----------------------</h1>
         <p className="text-balance">{recipe}</p>
       </div>
-      <p className="text-yellow-500">{price}</p>
+      <p className="text-yellow-500">${price}</p>
     </div>
   );
 };
