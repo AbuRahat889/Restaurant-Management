@@ -1,18 +1,33 @@
 import { Link, NavLink } from "react-router-dom";
 import "../Navbar/Navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Contex/AuthProvaider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+
+  const handleLogOut = () => {
+    logOut();
+  };
+
   const navOpstion = (
     <>
-      <NavLink to="/" className="">HOME</NavLink>
+      <NavLink to="/" className="">
+        HOME
+      </NavLink>
 
-      <NavLink to="/signin" className="mx-6">CONTACT US</NavLink>
+      <NavLink to="/signin" className="mx-6">
+        CONTACT US
+      </NavLink>
 
       <NavLink to="/signup">DASHBOARD</NavLink>
 
-      <NavLink to="/signup" className="mx-6">OUR MENU</NavLink>
+      <NavLink to="/menu" className="mx-6">
+        OUR MENU
+      </NavLink>
 
-      <NavLink to="/signup">OUR SHOP</NavLink>
+      <NavLink to="/ourshop">OUR SHOP</NavLink>
     </>
   );
   return (
@@ -47,16 +62,34 @@ const Navbar = () => {
             <a className=" text-xl font-black">Bistro Boss</a>
             <p className="tracking-widest font-bold ">RESTAURANT</p>
           </div>
-        </div> 
+        </div>
         <div className="navbar-center hidden lg:flex ">
           <ul className="menu menu-horizontal px-1 z ">{navOpstion}</ul>
         </div>
         <div className="navbar-end">
-          <Link className="mr-5">SIGN IN</Link>
+          {user ? (
+            <>
+              <Link onClick={handleLogOut} className="mr-5">
+                SIGN OUT{" "}
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/signin"} className="mr-5">
+                SIGN IN{" "}
+              </Link>
+            </>
+          )}
           <div className="avatar online">
             <div className="size-14 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            </div>
+              {
+                user? <><img src={user.photoURL} alt="" /></> : <>
+                
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            
+            </>
+              }
+              </div>
           </div>
         </div>
       </div>

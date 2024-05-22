@@ -10,9 +10,9 @@ const Featured = () => {
           subtitle="---Check it out---"
           title="FROM OUR MENU"
         ></SectionTitle>
-        <div className="flex items-center justify-center gap-8 px-40 py-8 pb-12">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-10 md:px-40 py-8 pb-12">
           <img className="w-96" src={featured} alt="" />
-          <div >
+          <div className="text-balance">
             <h1 className="text-lg ">March 20, 2023</h1>
             <h1 className="text-xl">WHERE CAN I GET SOME?</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe rem fugiat, dolore molestiae, optio delectus repellat incidunt consequatur exercitationem modi odit, quia ab. Nesciunt praesentium dolores laboriosam reprehenderit repudiandae nihil et officia ratione commodi eius, atque assumenda sed. Voluptatum temporibus debitis vel quod, delectus libero sunt sed corporis reiciendis ullam!</p>
