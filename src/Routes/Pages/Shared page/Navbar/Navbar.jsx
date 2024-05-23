@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import "../Navbar/Navbar.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../../Contex/AuthProvaider";
+import { BsCart2 } from "react-icons/bs";
+import UseCart from "../../../../Hooks/UseCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  const [cart] = UseCart();
+  console.log(user);
 
   const handleLogOut = () => {
     logOut();
@@ -21,13 +24,18 @@ const Navbar = () => {
         CONTACT US
       </NavLink>
 
-      <NavLink to="/signup">DASHBOARD</NavLink>
+      <NavLink to="/dashbord">DASHBOARD</NavLink>
 
       <NavLink to="/menu" className="mx-6">
         OUR MENU
       </NavLink>
 
       <NavLink to="/ourshop">OUR SHOP</NavLink>
+
+      <NavLink to={'/dashbord/mycart'} className="flex ml-5">
+        <BsCart2 className="text-2xl" />
+        <div className="badge badge-secondary">+{cart.length}</div>
+      </NavLink>
     </>
   );
   return (
@@ -69,7 +77,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <Link onClick={handleLogOut} className="mr-5">
+              <Link  onClick={handleLogOut} className="mr-5 tooltip  tooltip-left" data-tip={user?.displayName}>
                 SIGN OUT{" "}
               </Link>
             </>
@@ -80,16 +88,22 @@ const Navbar = () => {
               </Link>
             </>
           )}
+         
+
           <div className="avatar online">
             <div className="size-14 rounded-full">
-              {
-                user? <><img src={user.photoURL} alt="" /></> : <>
-                
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            
-            </>
-              }
-              </div>
+              {user ? (
+                <>
+                  {/* <h1>{user.displayName}</h1> */}
+
+                  <img src={user.photoURL} alt="" />
+                </>
+              ) : (
+                <>
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

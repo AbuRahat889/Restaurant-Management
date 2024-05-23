@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import img from "../../../assets/others/authentication1.png";
 import logo from "../../../assets/logo.png";
@@ -21,6 +21,9 @@ const SignIn = () => {
   const { userSignIn } = useContext(AuthContext);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  console.log(location.state);
 
   //handle capcha
   useEffect(() => {
@@ -54,7 +57,7 @@ const SignIn = () => {
           text: "Sign in Successfully!",
           icon: "success",
         });
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         Swal.fire({
@@ -77,7 +80,7 @@ const SignIn = () => {
           text: "Sign in Successfully!",
           icon: "success",
         });
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
