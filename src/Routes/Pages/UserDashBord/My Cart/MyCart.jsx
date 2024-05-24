@@ -1,11 +1,46 @@
 import { MdDelete } from "react-icons/md";
 import UseCart from "../../../../Hooks/UseCart";
 import SectionTitle from "../../Components/SectionTitle";
+import UseAxiosSequre from "../../../../Hooks/UseAxiosSequre";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
-  const [cart] = UseCart();
-  const sum = cart.reduce((previousValue, currentValue) => previousValue + currentValue.price,0);
-//   console.log(cart);
+  const [cart,refetch] = UseCart();
+  const axiosSequre = UseAxiosSequre();
+
+  //handle delete button
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSequre.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+
+        });
+      }
+
+    });
+  };
+
+  const sum = cart.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.price,
+    0
+  );
+  console.log(cart);
   return (
     <div className="mt-10">
       <SectionTitle
@@ -32,30 +67,33 @@ const MyCart = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {
-                cart.map(item=><tr key={item._id}>
-                    <td>1</td>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img
-                              src={item.image}
-                              alt="Avatar Tailwind CSS Component"
-                            />
-                          </div>
-                        </div>
+            {cart.map((item, index) => (
+              <tr key={item._id}>
+                <td>{index + 1}</td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={item.image}
+                          alt="Avatar Tailwind CSS Component"
+                        />
                       </div>
-                    </td>
-                    <td>
-                      {item.name}
-                    </td>
-                    <td>{item.price}</td>
-                    <th>
-                      <button className=" text-xl hover:text-red-600"><MdDelete /></button>
-                    </th>
-                  </tr>)
-            }
+                    </div>
+                  </div>
+                </td>
+                <td>{item.name}</td>
+                <td>{item.price}</td>
+                <th>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className=" text-xl hover:text-red-600"
+                  >
+                    <MdDelete />
+                  </button>
+                </th>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

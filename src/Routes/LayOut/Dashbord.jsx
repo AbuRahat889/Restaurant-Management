@@ -1,4 +1,4 @@
-import { FaCalendarPlus, FaHome } from "react-icons/fa";
+import { FaBook, FaCalendarPlus, FaHome, FaList, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import { SlCalender } from "react-icons/sl";
 import { IoWallet } from "react-icons/io5";
@@ -7,49 +7,84 @@ import { TbMessage2Star } from "react-icons/tb";
 import { TfiMenu } from "react-icons/tfi";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoMdMail } from "react-icons/io";
-import '../LayOut/Dashbord.css'
-
+import "../LayOut/Dashbord.css";
+import { ImSpoonKnife } from "react-icons/im";
 
 const Dashbord = () => {
+  //TODO : get isadmin value form database
+  const isAdmin = true;
+
   return (
     <div className="max-w-screen-xl mx-auto">
       <div className="flex gap-10">
         <div className="w-64 min-h-screen bg-[#d1a054] p-6">
-            {/* logo bistor boss */}
-        <div className="cinzel mb-10">
+          {/* logo bistor boss */}
+          <div className="cinzel mb-10">
             <a className=" text-xl font-black">Bistro Boss</a>
             <p className="tracking-widest font-bold ">RESTAURANT</p>
           </div>
 
           <ul>
-            <li className="flex gap-2 items-center text-2xl mb-6">
+            {isAdmin ? (
+              <>
+              <li className="flex gap-2 items-center text-2xl mb-6">
               <FaHome></FaHome>
-              <NavLink to={"/userHome"}> User Home</NavLink>
+              <NavLink to={"/dashbord/adminHome"}> Admin Home</NavLink>
             </li>
             <li className="flex gap-2 items-center text-2xl mb-6">
-              <SlCalender />
-              <NavLink to={"/userHome"}> reservation</NavLink>
+            <ImSpoonKnife />
+              <NavLink to={"/dashbord/addItems"}> Add Items</NavLink>
             </li>
             <li className="flex gap-2 items-center text-2xl mb-6">
-              <IoWallet />
-              <NavLink to={"/userHome"}> payment history</NavLink>
+              <FaList />
+              <NavLink to={"/dashbord/manageItems"}> Manage Items</NavLink>
             </li>
             <li>
               <NavLink
                 className="flex gap-2 items-center text-2xl mb-6"
-                to={"/dashbord/mycart"}
+                to={"/dashbord/bookingManage"}
               >
-                <BsCart></BsCart>my cart
+                <FaBook></FaBook>Bookings
               </NavLink>
             </li>
             <li className="flex gap-2 items-center text-2xl mb-6">
-              <TbMessage2Star />
-              <NavLink to={"/userHome"}>add review</NavLink>
+            <FaUsers />
+              <NavLink to={"/dashbord/allusers"}>All Users</NavLink>
             </li>
-            <li className="flex gap-2 items-center text-2xl mb-6">
-              <FaCalendarPlus />
-              <NavLink to={"/userHome"}>my booking</NavLink>
-            </li>
+            
+              </>
+            ) : (
+              <>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <FaHome></FaHome>
+                  <NavLink to={"/userHome"}> User Home</NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <SlCalender />
+                  <NavLink to={"/userHome"}> reservation</NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <IoWallet />
+                  <NavLink to={"/userHome"}> payment history</NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="flex gap-2 items-center text-2xl mb-6"
+                    to={"/dashbord/mycart"}
+                  >
+                    <BsCart></BsCart>my cart
+                  </NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <TbMessage2Star />
+                  <NavLink to={"/userHome"}>add review</NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <FaCalendarPlus />
+                  <NavLink to={"/userHome"}>my booking</NavLink>
+                </li>
+              </>
+            )}
 
             <div className="divider bg-white h-1"></div>
 

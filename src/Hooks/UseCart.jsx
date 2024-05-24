@@ -7,6 +7,7 @@ const UseCart = () => {
   //use ten stack query
   const axiosSequre = UseAxiosSequre();
   const { user } = useContext(AuthContext);
+  
   const { refetch , data: cart = [] } = useQuery({
     queryKey: ["cart", user?.email],
     queryFn: async () => {
