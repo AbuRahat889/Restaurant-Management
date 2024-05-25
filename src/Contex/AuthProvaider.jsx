@@ -6,19 +6,20 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.config";
+import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvaider = ({ children }) => {
   const [user, serUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = UseAxiosPublic();
 
   //sign up with email and password
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  
 
   //sign in user in email and password
   const userSignIn = (email, password) => {
@@ -27,27 +28,40 @@ const AuthProvaider = ({ children }) => {
   };
 
   //logout
-  const logOut = ()=>{
+  const logOut = () => {
     setLoading(true);
-    return signOut(auth)
-  }
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       serUser(currentuser);
+      // console.log('current user i s ' , currentuser);
+      const userInfo = { email: currentuser?.email };
+      // console.log('this is current indor', userInfo);
+      if (currentuser) {
+        axiosPublic.post(`/jwt`, userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
+      } else {
+        // remove token
+        localStorage.removeItem("access-token");
+      }
       setLoading(false);
     });
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
     loading,
     createUser,
     userSignIn,
-    logOut
+    logOut,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
