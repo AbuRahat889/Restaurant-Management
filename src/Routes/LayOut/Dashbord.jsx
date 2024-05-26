@@ -1,4 +1,10 @@
-import { FaBook, FaCalendarPlus, FaHome, FaList, FaUsers } from "react-icons/fa";
+import {
+  FaBook,
+  FaCalendarPlus,
+  FaHome,
+  FaList,
+  FaUsers,
+} from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import { SlCalender } from "react-icons/sl";
 import { IoWallet } from "react-icons/io5";
@@ -9,10 +15,11 @@ import { GiShoppingBag } from "react-icons/gi";
 import { IoMdMail } from "react-icons/io";
 import "../LayOut/Dashbord.css";
 import { ImSpoonKnife } from "react-icons/im";
+import UseAdmin from "../../Hooks/UseAdmin";
 
 const Dashbord = () => {
   //TODO : get isadmin value form database
-  const isAdmin = true;
+  const [isAdmin] = UseAdmin();
 
   return (
     <div className="max-w-screen-xl mx-auto">
@@ -27,31 +34,30 @@ const Dashbord = () => {
           <ul>
             {isAdmin ? (
               <>
-              <li className="flex gap-2 items-center text-2xl mb-6">
-              <FaHome></FaHome>
-              <NavLink to={"/dashbord/adminHome"}> Admin Home</NavLink>
-            </li>
-            <li className="flex gap-2 items-center text-2xl mb-6">
-            <ImSpoonKnife />
-              <NavLink to={"/dashbord/addItems"}> Add Items</NavLink>
-            </li>
-            <li className="flex gap-2 items-center text-2xl mb-6">
-              <FaList />
-              <NavLink to={"/dashbord/manageItems"}> Manage Items</NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="flex gap-2 items-center text-2xl mb-6"
-                to={"/dashbord/bookingManage"}
-              >
-                <FaBook></FaBook>Bookings
-              </NavLink>
-            </li>
-            <li className="flex gap-2 items-center text-2xl mb-6">
-            <FaUsers />
-              <NavLink to={"/dashbord/allusers"}>All Users</NavLink>
-            </li>
-            
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <FaHome></FaHome>
+                  <NavLink to={"/dashbord/adminHome"}> Admin Home</NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <ImSpoonKnife />
+                  <NavLink to={"/dashbord/addItems"}> Add Items</NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <FaList />
+                  <NavLink to={"/dashbord/manageItems"}> Manage Items</NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="flex gap-2 items-center text-2xl mb-6"
+                    to={"/dashbord/bookingManage"}
+                  >
+                    <FaBook></FaBook>Bookings
+                  </NavLink>
+                </li>
+                <li className="flex gap-2 items-center text-2xl mb-6">
+                  <FaUsers />
+                  <NavLink to={"/dashbord/allusers"}>All Users</NavLink>
+                </li>
               </>
             ) : (
               <>

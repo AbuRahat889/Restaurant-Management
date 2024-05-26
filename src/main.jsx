@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./Routes/Router";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvaider from "./Contex/AuthProvaider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { router } from './Routes/Routs/Router';
 const queryClient = new QueryClient();
 
 
