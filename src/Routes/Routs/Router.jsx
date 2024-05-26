@@ -13,6 +13,7 @@ import AddItems from "../Pages/Admin Dashbord/Add Items/AddItems";
 import ManageItems from "../Pages/Admin Dashbord/Manage Items/ManageItems";
 import BookingManage from "../Pages/Admin Dashbord/Bookings/BookingManage";
 import PrivateRoute from "./PrivateRoute";
+import AdminRouts from "./AdminRouts";
 
 export const router = createBrowserRouter([
   {
@@ -57,23 +58,23 @@ export const router = createBrowserRouter([
       //admin routes
       {
         path: "/dashbord/adminHome",
-        element: <AdminHome></AdminHome>,
+        element: <AdminRouts><AdminHome></AdminHome></AdminRouts>,
       },
       {
         path: "/dashbord/addItems",
-        element: <AddItems></AddItems>,
+        element: <AdminRouts><AddItems></AddItems></AdminRouts>,
       },
       {
         path: "/dashbord/manageItems",
-        element: <ManageItems></ManageItems>,
+        element: <AdminRouts><ManageItems></ManageItems></AdminRouts>,
       },
       {
         path: "/dashbord/bookingManage",
-        element: <BookingManage></BookingManage>,
+        element: <AdminRouts><BookingManage></BookingManage></AdminRouts>,
       },
       {
         path: "/dashbord/allusers",
-        element: <AllUsers></AllUsers>,
+        element: <AdminRouts><AllUsers></AllUsers></AdminRouts>,
       },
     ],
   },

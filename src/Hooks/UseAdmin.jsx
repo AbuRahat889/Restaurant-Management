@@ -6,7 +6,7 @@ import UseAxiosSequre from "./UseAxiosSequre";
 const UseAdmin = () => {
   const { user } = useContext(AuthContext);
   const axiosSequre = UseAxiosSequre();
-  const { data: isAdmin , isPending : isAdminLoading} = useQuery({
+  const { data: isAdmin, isPending: isAdminLoading } = useQuery({
     queryKey: [user?.email, "isAdmin"],
     queryFn: async () => {
       const res = await axiosSequre.get(`/users/admin/${user.email}`);
@@ -14,7 +14,7 @@ const UseAdmin = () => {
       return res.data?.admin;
     },
   });
-  return [isAdmin,isAdminLoading];
+  return [isAdmin, isAdminLoading];
 };
 
 export default UseAdmin;
