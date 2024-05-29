@@ -6,7 +6,7 @@ import UseAxiosSequre from "../../../../Hooks/UseAxiosSequre";
 import Swal from "sweetalert2";
 
 const AddItems = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const axiosPublic = UseAxiosPublic();
   const axiosSequre = UseAxiosSequre();
 
@@ -14,13 +14,11 @@ const AddItems = () => {
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
   const onSubmit = async (data) => {
-    // console.log(data);
-
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: { "content-type": "multipart/form-data" },
     });
-    console.log(res.data);
+
     //send menu item data in database
     if (res.data.success) {
       const menuInfo = {
@@ -31,9 +29,10 @@ const AddItems = () => {
         image: res.data.data.display_url,
       };
       const menuItem = await axiosSequre.post(`/menus`, menuInfo);
-      console.log("item added : ", menuItem);
+
       //   insertedId
       if (menuItem.data.insertedId) {
+        reset();
         Swal.fire({
           title: "Good job!",
           text: "You added the food!",

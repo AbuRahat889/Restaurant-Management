@@ -15,7 +15,6 @@ const Menu = () => {
     fetch(`${import.meta.env.VITE_SITE_Link}/menus`)
       .then((res) => res.json())
       .then((data) => {
-        // const populer = data.filter(item=>item.category === 'popular');
         setMenuItem(data);
       });
   }, []);

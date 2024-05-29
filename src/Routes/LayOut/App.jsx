@@ -4,7 +4,7 @@ import Navbar from "../Pages/Shared page/Navbar/Navbar";
 
 function App() {
   const location = useLocation();
-  // console.log(location);
+
   const hideFooter =
     location.pathname.includes("signin") ||
     location.pathname.includes("signup");

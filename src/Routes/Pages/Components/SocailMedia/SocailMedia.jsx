@@ -15,14 +15,12 @@ const SocailMedia = () => {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-
         //update user info in db
         const userInfo = {
           name: result.user.displayName,
           email: result.user.email,
         };
-        axiosPublic.post(`/users`, userInfo)
-        .then((res) => {
+        axiosPublic.post(`/users`, userInfo).then((res) => {
           console.log(res);
 
           Swal.fire({
@@ -35,7 +33,6 @@ const SocailMedia = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log("erroror messta", errorMessage);
         Swal.fire({
           icon: "error",
           title: "Oops...kkkk",

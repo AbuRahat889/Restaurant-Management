@@ -22,13 +22,11 @@ const Card = ({ item }) => {
         image: item.image,
         price: item.price,
       };
-      console.log(cartInformation);
-      // http://localhost:5000
-      //${import.meta.env.VITE_SITE_Link}
+
       axiosSequre
         .post(`/carts`, cartInformation)
         .then((res) => {
-          console.log(res.data);
+          
 
           if (res.data.insertedId) {
             Swal.fire({

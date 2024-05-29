@@ -21,7 +21,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log(location.state);
+  
 
   //handle capcha
   useEffect(() => {
@@ -30,7 +30,7 @@ const SignIn = () => {
 
   const handleCapcha = () => {
     const user_capcha_value = capchaRef.current.value;
-    // console.log(user_capcha_value);
+    
     if (validateCaptcha(user_capcha_value) == true) {
       setDisable(false);
     } else {
@@ -44,7 +44,7 @@ const SignIn = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    
 
     //sign in
     userSignIn(email, password)

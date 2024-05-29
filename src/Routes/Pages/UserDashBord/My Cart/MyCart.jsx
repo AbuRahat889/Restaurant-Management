@@ -40,7 +40,7 @@ const MyCart = () => {
     (previousValue, currentValue) => previousValue + currentValue.price,
     0
   );
-  console.log(cart);
+  
   return (
     <div className="mt-10">
       <SectionTitle
@@ -53,6 +53,7 @@ const MyCart = () => {
         <h1 className="text-4xl">total price: {sum} </h1>
         <button className="btn bg-[#d1a054]">Pay</button>
       </div>
+      
       <div className="overflow-x-auto px-5">
         <table className="table">
           {/* head */}
